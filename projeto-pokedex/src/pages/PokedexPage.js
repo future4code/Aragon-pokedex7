@@ -2,14 +2,14 @@ import { Header } from "../components/Header";
 
 export function PokedexPage () {
     return (
-        <div>
+        <main>
 
             <Header 
                 paginaAtual={"pokedex"}
             />
 
-            <h1>Pagina Pokedex</h1>
+            <h1>Lista Pokedex</h1>
         
-        </div>
+        </main>
     )
 }
