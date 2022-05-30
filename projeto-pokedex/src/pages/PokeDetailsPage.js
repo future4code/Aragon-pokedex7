@@ -1,8 +1,12 @@
+import { useParams } from "react-router-dom";
 import { Header } from "../components/Header";
 
 export function PokeDetails () {
+
+    const params = useParams()
+
     return (
-        <div>
+        <main>
 
             <Header
                 paginaAtual = {"detalhesPokemons"}
@@ -10,8 +14,9 @@ export function PokeDetails () {
 
             <hr/>
             
-            <h1>Pagina de Detalhes</h1>
+            <h1>PokeInfos</h1>
+            <p>Nome: {params.pokeName}</p>
         
-        </div>
+        </main>
     )
 }

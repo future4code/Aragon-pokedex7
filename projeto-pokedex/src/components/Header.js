@@ -1,38 +1,39 @@
 import { useNavigate } from "react-router-dom"
-import { goToPokeDetailsPage, goToPokedexPage, goToPokeListPage, goToPreviousPage } from "../routes/coordinator"
+import { goToPokedexPage, goToPokeListPage, goToPreviousPage } from "../routes/coordinator"
 
 export function Header(props){
     const navigate = useNavigate()
 
     const renderizaHeader = ()=>{
+        
         switch(props.paginaAtual){
             case "pokelista":
                 return (
-                    <div>
+                    <section>
                         <h1>Pokemons</h1>
                         <button onClick={()=> goToPokedexPage(navigate)}>Ir para pokedex</button>
-                    </div>
+                    </section>
                 );
             case "pokedex":
                 return (
-                    <div>
+                    <section>
                         <h1>Pokedex</h1>
                         <button onClick={()=> goToPokeListPage(navigate)}>Ir para lista de Pokemons</button>
-                    </div>
+                    </section>
                 )
             case "detalhesPokemons":
                 return (
-                    <div>
+                    <section>
                         <h1>Detalhes</h1>
                         <button onClick={()=> goToPreviousPage(navigate)}>Voltar</button>
-                    </div>
+                    </section>
                 )
         }
     }
 
     return(
-        <div>
+        <main>
             {renderizaHeader()}
-        </div>
+        </main>
     )
 }
