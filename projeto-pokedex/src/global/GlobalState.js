@@ -37,8 +37,6 @@ export default function GlobalState(props) {
         getDetailsPoke: getDetailsPoke,
     };
 
-    const context = { states, setters, getters }
-
 
     return (
         <GlobalContext.Provider value={{states, setters, getters}}>

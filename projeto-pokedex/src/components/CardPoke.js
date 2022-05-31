@@ -4,6 +4,7 @@ import { goToPokeDetailsPage } from "../routes/coordinator";
 
 export function CardPoke(props) {
     const navigate = useNavigate()
+  
 
     return (
         <main>
