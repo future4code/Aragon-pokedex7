@@ -1,6 +1,6 @@
 import { Header } from "../components/Header";
 
-export function PokedexPage () {
+function PokedexPage () {
     return (
         <main>
 
@@ -13,3 +13,5 @@ export function PokedexPage () {
         </main>
     )
 }
+
+export default PokedexPage;
