@@ -9,27 +9,42 @@ export default function GlobalState(props) {
 
     const [pokeList, setPokeList] = useState([]);
     const [pokemonDetails, setPokemonDetails] = useState({})
+    const [pokedex, setPokedex] = useState([])
 
-    const getPokeList = () => {
-        axios.get(`${BASE_URL}/list?limit=20&offset=0`)
-            .then((res) => setPokeList(res.data))
-            .catch((err) => console.log(err.message))
+
+    const getPokeList = async () => {
+        try {
+            const res = await axios.get(`${BASE_URL}/list?limit=20&offset=0`);
+            const requests = res.data.map((pokemon) =>
+                axios.get(`${BASE_URL}/${pokemon.name}`)
+            );
+
+            const response = await Promise.all(requests);
+            const list = response.map((pokemon)=> pokemon.data);
+            setPokeList(list)
+
+        } catch (err) {
+            console.log(err.message)
+        }
     }
 
-    const getDetailsPoke = (pokeName)=>{
+
+    const getDetailsPoke = (pokeName) => {
         axios.get(`${BASE_URL}/${pokeName}`)
             .then((res) => setPokemonDetails(res.data))
-            .catch((err)=> console.log(err.message))
+            .catch((err) => console.log(err.message))
     }
 
     const states = {
         pokeList: pokeList,
         pokemonDetails: pokemonDetails,
+        pokedex: pokedex,
     };
 
     const setters = {
         setPokeList: setPokeList,
         setPokemonDetails: setPokemonDetails,
+        setPokedex: setPokedex,
     };
 
     const getters = {
@@ -39,7 +54,7 @@ export default function GlobalState(props) {
 
 
     return (
-        <GlobalContext.Provider value={{states, setters, getters}}>
+        <GlobalContext.Provider value={{ states, setters, getters }}>
             {props.children}
         </GlobalContext.Provider>
     )

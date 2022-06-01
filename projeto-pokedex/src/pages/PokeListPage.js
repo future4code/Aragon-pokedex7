@@ -20,6 +20,7 @@ function PokeListPage() {
             <CardPoke
                 key={pokemon.id}
                 pokemon={pokemon}
+                paginaAtual={"pokelista"}
             />
         )
     }) : <p>Carregando...</p>
