@@ -8,13 +8,14 @@ export const GlobalContext = createContext()
 export default function GlobalState(props) {
 
     const [pokeList, setPokeList] = useState([]);
-    const [pokemonDetails, setPokemonDetails] = useState({})
-    const [pokedex, setPokedex] = useState([])
+    const [pokemonDetails, setPokemonDetails] = useState({});
+    const [pokedex, setPokedex] = useState([]);
+    const [pagina, setPagina] = useState(1)
 
 
-    const getPokeList = async () => {
+    const getPokeList = async (pagina) => {
         try {
-            const res = await axios.get(`${BASE_URL}/list?limit=20&offset=0`);
+            const res = await axios.get(`${BASE_URL}/list?limit=20&offset=${20*(pagina -1)}`);
             const requests = res.data.map((pokemon) =>
                 axios.get(`${BASE_URL}/${pokemon.name}`)
             );
@@ -39,12 +40,14 @@ export default function GlobalState(props) {
         pokeList: pokeList,
         pokemonDetails: pokemonDetails,
         pokedex: pokedex,
+        pagina: pagina,
     };
 
     const setters = {
         setPokeList: setPokeList,
         setPokemonDetails: setPokemonDetails,
         setPokedex: setPokedex,
+        setPagina: setPagina,
     };
 
     const getters = {
