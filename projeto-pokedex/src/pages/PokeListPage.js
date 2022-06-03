@@ -2,6 +2,40 @@ import { useContext, useEffect } from "react";
 import { CardPoke } from "../components/CardPoke";
 import { Header } from "../components/Header";
 import { GlobalContext } from "../global/GlobalState";
+import styled from 'styled-components';
+
+const ListaDePokemons = styled.main`
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+flex-wrap: wrap;
+`
+
+const OrdenaPagina = styled.main`
+display: flex;
+flex-direction: row;
+justify-content: center;
+
+button{
+    background-color:#ffcc00;
+	border-radius:8px;
+	color:#2f68b2;
+	font-family:Arial;
+	font-size:12px;
+	font-weight:bold;
+	padding:5px 10px;
+    margin: 2px;
+}
+
+span{
+    font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+    margin-top: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+`
 
 function PokeListPage() {
 
@@ -45,25 +79,23 @@ function PokeListPage() {
 
 return (
     <main>
-        <Header
-            paginaAtual={"pokelista"}
-        />
+            <Header
+                paginaAtual={"pokelista"}
+            />
+        <OrdenaPagina>
+            {pagina !== 1 && 
+                <button onClick={()=> trocarPagina(-1)}>Voltar página</button>
+            }
 
-        <hr/>
-        <h1>Pagina lista de pokemons</h1>
-        
-        {pagina !== 1 && 
-            <button onClick={()=> trocarPagina(-1)}>Voltar página</button>
-        }
+            <span>Página {pagina}</span>
 
-        <span>Página {pagina}</span>
-
-        {pokeList.length && 
-            <button onClick={()=> trocarPagina(1)}>Próxima página</button>
-        }
-        <hr/>
-
-        {renderizaLista}
+            {pokeList.length && 
+                <button onClick={()=> trocarPagina(1)}>Próxima página</button>
+            }
+        </OrdenaPagina>
+        <ListaDePokemons>
+            {renderizaLista}
+        </ListaDePokemons>
     </main>
 )
 }
