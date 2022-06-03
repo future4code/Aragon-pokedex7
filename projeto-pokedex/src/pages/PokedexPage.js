@@ -2,6 +2,32 @@ import { useContext } from "react";
 import { CardPoke } from "../components/CardPoke";
 import { Header } from "../components/Header";
 import { GlobalContext } from "../global/GlobalState";
+import styled from 'styled-components';
+import pokedexVazia from '../img/pokedexVazia.png';
+
+const None = styled.p`
+display: flex;
+flex-direction: column;
+align-items: center;
+
+p{
+    font-family: Arial;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+img{
+    margin: 50px;
+    height: 300px;
+}
+`
+
+const ListaPokedex = styled.main`
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
+justify-content: space-around;
+`
 
 function PokedexPage () {
     const context = useContext(GlobalContext)
@@ -17,7 +43,10 @@ function PokedexPage () {
             />     
         )
     }) : (
-        <p>Nenhum pokemon na sua pokedex :(</p>
+        <None>
+            <p>Nenhum pokémon na sua pokedex :(</p>
+            <img src={pokedexVazia} />
+        </None>
     )
 
     return (
@@ -26,10 +55,9 @@ function PokedexPage () {
             <Header 
                 paginaAtual={"pokedex"}
             />
-
-            <h1>Lista Pokedex</h1>
-            {renderizaPokedex}
-        
+            <ListaPokedex>
+                {renderizaPokedex}
+            </ListaPokedex>
         </main>
     )
 }

@@ -2,6 +2,35 @@ import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Header } from "../components/Header";
 import { GlobalContext } from "../global/GlobalState";
+import styled from 'styled-components';
+
+const Div = styled.div`
+display: flex;
+align-items: center;
+justify-content: space-around;
+padding: 3%;
+`
+
+const Section = styled.section`
+img{
+    height: 200px;
+    background-color: #2f68b2;
+}
+
+h2{
+    font-family: Arial;
+    padding: 1%;
+    color: #2f68b2;
+}
+`
+
+const Card = styled.div`
+border-style: solid;
+border-color: #2f68b2;
+border-radius: 3%;
+padding: 1%;
+box-shadow: 0 0 1em #2f68b2;
+`
 
 function PokeDetailsPage() {
 
@@ -16,48 +45,50 @@ function PokeDetailsPage() {
     }, [])
 
     const renderizaDetails = pokemonDetails.name ? (
-        <>
-            <section>
-                <h2>{pokemonDetails.name.toUpperCase()}</h2>
-                <img src={pokemonDetails.images.front} alt="Imagem do pokemon de frente" />
-                <img src={pokemonDetails.images.back} alt="Imagem do pokemon de costas" />
-            </section>
+        <Div>
+            <Card>
+                <Section>
+                    <h2>{pokemonDetails.name.toUpperCase()}</h2>
+                    <img src={pokemonDetails.images.front} alt="Imagem do pokemon de frente" />
+                    <img src={pokemonDetails.images.back} alt="Imagem do pokemon de costas" />
+                </Section>
 
-            <section>
-                <h2>Status:</h2>
-                {pokemonDetails.status.map((statu)=>{
-                    return(
-                        <section key={statu.name}>
-                            <span>{statu["status_name"].toUpperCase()}: </span>
-                            <span>{statu.value}</span>
-                        </section>
-                    )
-                })}
-            </section>
+                <Section>
+                    <h2>Status:</h2>
+                    {pokemonDetails.status.map((statu)=>{
+                        return(
+                            <section key={statu.name}>
+                                <span>{statu["status_name"].toUpperCase()}: </span>
+                                <span>{statu.value}</span>
+                            </section>
+                        )
+                    })}
+                </Section>
 
-            <section>
-                <h2>Tipos:</h2>
-                {pokemonDetails.types.map((type)=>{
-                    return (
-                        <li key={type}>{type}</li>
-                    )
-                })}
-            </section>
+                <Section>
+                    <h2>Tipos:</h2>
+                    {pokemonDetails.types.map((type)=>{
+                        return (
+                            <li key={type}>{type}</li>
+                        )
+                    })}
+                </Section>
 
-            <section>
-                <h2>Habilidades:</h2>
-                {pokemonDetails.abilities.filter((abilitie, index)=>{
-                    if (index < 5) {
-                        return abilitie;
-                    }                   
-                })
-                .map((abilitie)=>{
-                    return (
-                        <li key={abilitie}>{abilitie}</li>
-                    )
-                })}
-            </section>
-        </>
+                <Section>
+                    <h2>Habilidades:</h2>
+                    {pokemonDetails.abilities.filter((abilitie, index)=>{
+                        if (index < 5) {
+                            return abilitie;
+                        }                   
+                    })
+                    .map((abilitie)=>{
+                        return (
+                            <li key={abilitie}>{abilitie}</li>
+                        )
+                    })}
+                </Section>
+            </Card>
+        </Div>
     ) : <p> Carregando...</p>
 
     return (
@@ -67,9 +98,6 @@ function PokeDetailsPage() {
                 paginaAtual={"detalhesPokemons"}
             />
 
-            <hr />
-
-            <h1>PokeInfos</h1>
             {renderizaDetails}
 
         </main>

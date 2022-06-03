@@ -1,13 +1,12 @@
-import { useNavigate } from "react-router-dom"
-import { goToPokeListPage } from "../routes/coordinator"
+import { Header } from "../components/Header";
 
 export function ErrorPage () {
-    const navigate = useNavigate()
     return (
         <main>
-
-            <h1>Pagina de Erro</h1>
-            <button onClick={()=> goToPokeListPage(navigate)}>Ir para pagina inicial</button>
+            <Header 
+                paginaAtual={"paginaDeErro"}
+            />
+            <h1>Opa, aconteceu um erro!</h1>
         
         </main>
     )
